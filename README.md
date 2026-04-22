@@ -1,8 +1,8 @@
 # Aplicação de Inteligência Financeira
 
-Este projeto unifica uma interface frontend (Streamlit) com um backend (FastAPI) e um serviço de IA local (Ollama).
+Este projeto unifica uma interface frontend (Streamlit) com um backend (FastAPI) e um serviço de IA local (Ollama). O projeto faz uso da funcionalidade 'submodules' do git para gerenciar suas dependências. Mais detalhes sobres seus componentes pode ser encontrados nos repositorios [backend](https://github.com/henriquefac/plataforma-inteligencia-financeira) e [frontend](https://github.com/henriquefac/dashboard-plataforma-inteligencia-financeira).
 
-## 🚀 Como Executar com Docker Compose
+## Como Executar com Docker Compose
 
 A maneira mais fácil de subir toda a aplicação é utilizando o Docker Compose. Isso configurará automaticamente o frontend, o backend e o serviço do Ollama com o modelo `mistral`.
 
@@ -15,8 +15,9 @@ A maneira mais fácil de subir toda a aplicação é utilizando o Docker Compose
 
 1.  **Clone o repositório** (se ainda não o fez):
     ```bash
-    git clone <url-do-repositorio>
+    git clone --recursive <url-do-repositorio>
     cd <diretorio-do-projeto>
+    git submodule update --init --recursive
     ```
 
 2.  **Configure as variáveis de ambiente**:
@@ -42,7 +43,7 @@ A maneira mais fácil de subir toda a aplicação é utilizando o Docker Compose
     - **Frontend (Streamlit)**: [http://localhost:8501](http://localhost:8501)
     - **Backend (API Docs)**: [http://localhost:8000/docs](http://localhost:8000/docs)
 
-### 🔑 Configuração do OpenRouter (Recomendado)
+### Configuração do OpenRouter
 
 Esta aplicação utiliza o **OpenRouter** como provedor principal de IA por oferecer acesso gratuito a modelos potentes como o Llama 3 e Gemma.
 1. Crie uma conta em [openrouter.ai](https://openrouter.ai/).
@@ -58,13 +59,13 @@ Principais variáveis:
 - `LLM_PROVIDER`: Define o provedor de LLM (`openrouter` ou `ollama`).
 - `LLM_MODEL`: Modelo usado no Ollama (padrão: `mistral`).
 
-## 📁 Estrutura do Projeto
+## Estrutura do Projeto
 
 - `backend/`: API FastAPI para processamento de dados e integração com LLM.
 - `frontend/`: Interface Streamlit para visualização de métricas e chat de IA.
 - `docker-compose.yml`: Orquestração de todos os serviços.
 
-## 🛑 Parando a Aplicação
+## Parando a Aplicação
 
 Para parar e remover os containers:
 ```bash
