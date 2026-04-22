@@ -5,12 +5,13 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8000:8000"
-    environment:
-      - LLM_BASE_URL=http://ollama:11434
-      - LLM_PROVIDER=ollama
-      - LLM_MODEL=mistral
+    env_file:
+      - .env
     depends_on:
-      - ollama
+      ollama:
+        condition: service_healthy
+      ollama-pull-model:
+        condition: service_completed_successfully
     volumes:
       - backend_data:/app/data
 
@@ -20,8 +21,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8501:8501"
-    environment:
-      - BASE_URL=http://backend:8000
+    env_file:
+      - .env
     depends_on:
       - backend
 
@@ -39,13 +40,13 @@ services:
 
   ollama-pull-model:
     image: ollama/ollama:latest
-    environment:
-      - OLLAMA_HOST=ollama
+    env_file:
+      - .env
     depends_on:
       ollama:
         condition: service_healthy
     entrypoint: /bin/sh
-    command: -c "ollama pull mistral"
+    command: -c "sleep 2 && until ollama list > /dev/null 2>&1; do echo 'Waiting for Ollama DNS...'; sleep 2; done && ollama pull mistral"
 
 volumes:
   backend_data:
