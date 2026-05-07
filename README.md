@@ -2,6 +2,8 @@
 
 Este projeto unifica uma interface frontend (Streamlit) com um backend (FastAPI) e um serviço de IA local (Ollama). O projeto faz uso da funcionalidade 'submodules' do git para gerenciar suas dependências. Mais detalhes sobres seus componentes pode ser encontrados nos repositorios [backend](https://github.com/henriquefac/plataforma-inteligencia-financeira) e [frontend](https://github.com/henriquefac/dashboard-plataforma-inteligencia-financeira).
 
+Para realizar um teste  local, procurar dentro do diretório do repositório do backend pela pasta "teste" e utilize o arquivo "dados.xlsx".
+
 ## Como Executar com Docker Compose
 
 A maneira mais fácil de subir toda a aplicação é utilizando o Docker Compose. Isso configurará automaticamente o frontend, o backend e o serviço do Ollama com o modelo `mistral`.
